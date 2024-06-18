@@ -1,2 +1,14 @@
+#Mi stuff
 .idea/
+
+#Virtual Env
 venv/
+
+config/__pycache__/settings.cpython-312.pyc
+
+#Database
+db.sqlite3
+
+#Migrations
+accounts/migrations/
+blog/migrations/
