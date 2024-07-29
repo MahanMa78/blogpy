@@ -21,3 +21,5 @@ config/__pycache__
 
 #Static files
 files/
+staticfiles/
+template_raw/
