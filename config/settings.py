@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-#CKEditor Settings 
+
 #Static Files
 STATIC_ROOT = os.path.join(BASE_DIR , 'staticfiles') #zamani estefade mishe ke az dastor collectstatic estefade mikonim va tamam staticfile haro jamavari mikone va mirize dakhel pooshe be esme staticfiles
 STATIC_URL = '/static/' #baraye zamani estefade mishe ke gharare toye url ma meghdare static bashe (yani request ma file haye css js va image ro mikhad)
@@ -153,3 +153,7 @@ STATICFILES_DIRS = (
 # CKEditor 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+#Media Settings 
+MEDIA_URL = 'files/'
+MEDIA_ROOT = os.path.join(BASE_DIR , '')
