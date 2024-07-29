@@ -12,3 +12,12 @@ db.sqlite3
 #Migrations
 accounts/migrations/
 blog/migrations/
+
+config/__pycache__
+
+
+# user : admin
+# pass : 40221441054052Ma
+
+#Static files
+files/
