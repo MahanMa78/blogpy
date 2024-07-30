@@ -52,7 +52,7 @@ class ConatactPage(TemplateView):
 
 
 class AllArticleAPIView(APIView):
-
+    # baraye search kardanesh bayad benevisim : http://localhost:8000/article/all/
     def get(self , requset , format = None):
         try:
             all_articles = Article.objects.all().order_by('-created_at')[:10] #khoroji in object ha az nooe query set hast
@@ -75,7 +75,8 @@ class AllArticleAPIView(APIView):
         
 
 
-class SingleArticleAPIView(APIView):
+class SingleArticleAPIView(APIView):#baraye zamani estefade mishe ke bekhahim yek maghale ro search konim
+    # baraye search kardanesh bayad benevisim : http://localhost:8000/article/?article_title=فوتبال
     
     def get(self,request,format=None):
         try:
@@ -91,7 +92,7 @@ class SingleArticleAPIView(APIView):
         
 
 class SearchArticleAPIView(APIView): #baraye zamani estefade mishe ke bekhahim yek kalame ya matn ro dakhele article ha search konim
-
+    # baraye search kardanesh bayad benevisim : http://localhost:8000/article/search/?query=لورم ایپسوم
     def get(self , request , format=None):
         try:
             from django.db.models import Q #baraye anjam query haye pishrafte dar django az Q estefade mikonim
@@ -112,6 +113,42 @@ class SearchArticleAPIView(APIView): #baraye zamani estefade mishe ke bekhahim y
 
             return Response({'data' : data} , status=status.HTTP_200_OK)
 
+        except:
+            return Response( {'status':"Internal Server Error , We'll Check It Latter"} ,
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR )
+        
+class SubmitArticleAPIView(APIView):
+
+    def post(self , requset , format = None):
+        try:
+            serializer = serializers.SubmitArticleSerializers(data=requset.data)
+            if serializer.is_valid():
+                title = serializer.data.get('title')
+                cover = requset.FILES['cover']
+                content = serializer.data.get('content')
+                category_id = serializer.data.get('category_id')
+                author_id = serializer.data.get('author_id')
+                promote = serializer.data.get('promote')
+            else:
+                return Response({'status':'Bad Request.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            user = User.objects.get(id = author_id)
+            # ham category va ham author ro bayad object hasho begirim shon darim azash id migirm
+            author = UserProfile.objects.get(user = user)
+            category = Category.objects.get(id = category_id)
+
+            article = Article()
+            article.title = title
+            article.cover = cover
+            article.content = content
+            #hala chon balatar ma az category va author object hashon ro gereftim inja estefade mikonim
+            article.author = author
+            article.category = category
+            article.promote = promote
+            article.save()
+        #NOKTE: ma az 'created_at' estefade nemikonim chon ke created_at meghdar default= datetime.now ro dare yani zamani ke object yek 
+        #edame: maghale sakhte mishe created_at meghdar pishfarz zamani ke maghale dare sakhte mishe ro migire va ma lazem nist zamani ke darim ba api kar mikonim meghdare created_at ro bedim
+            return Response({'status':'OK'},status=status.HTTP_200_OK)
         except:
             return Response( {'status':"Internal Server Error , We'll Check It Latter"} ,
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR )
