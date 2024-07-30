@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField #bayad yek python manage.py collectstatic ham bezanim ta yekseri file ro baraye ma tanzim kone
 from datetime import datetime
+from django.shortcuts import reverse
 
 # elat inke ma az FileField be jaye ImageFild estefade kardim in bood ke FileField khali kamel tar hast
 # ama ImageFiled dige niazi be validation nadare vali dar FileField bayad taarif konim
@@ -39,6 +40,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+    
+    # def get_absolute_url(self):
+    #     return reverse('single_standard',args=[self.pk])
     
 
 class Category(models.Model):
