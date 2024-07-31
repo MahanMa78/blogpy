@@ -155,7 +155,7 @@ class SubmitArticleAPIView(APIView):
         
 
 class UpdateArticleAPIView(APIView):
-    # baraye update cover az in link vared mishavim :  
+    # baraye update cover az in link vared mishavim :  http://localhost:8000/article/update-cover/
     def post(self , request , format= None):
         try: 
             serializer = serializers.UpdateArticleCoverSerializers(data=request.data)
@@ -167,9 +167,30 @@ class UpdateArticleAPIView(APIView):
                 return Response({'status':'Bad Request.'} , status=status.HTTP_400_BAD_REQUEST)
             
 
+
             Article.objects.filter(id= article_id).update(cover=cover)
 
             return Response({'status':'OK'} , status=status.HTTP_200_OK)
         except:
             return Response( {'status':"Internal Server Error , We'll Check It Latter"} ,
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR )
+        
+
+class DeleteArticleAPIView(APIView):
+    #baraye inke bekhahim hazf konim bayad az link : http://localhost:8000/article/delete/
+        def post(self, request , format=None):
+            try:
+                serializer = serializers.DeleteArticleSerializers(data = request.data)
+
+                if serializer.is_valid():
+                    article_id = serializer.data.get('article_id')
+                else:
+                    return Response({'status':"Bad Request"} , status=status.HTTP_400_BAD_REQUEST)
+                
+                Article.objects.filter(id = article_id ).delete()
+
+                return Response({'status':'OK'} , status=status.HTTP_200_OK)
+            
+            except:
+                return Response( {'status':"Internal Server Error , We'll Check It Latter"} ,
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR )

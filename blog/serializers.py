@@ -19,4 +19,7 @@ class SubmitArticleSerializers(serializers.Serializer):
 class UpdateArticleCoverSerializers(serializers.Serializer):
     article_id = serializers.IntegerField(required = True , allow_null = False )
     cover = serializers.FileField( required = True , allow_null = False , allow_empty_file = False )
-    
+
+
+class DeleteArticleSerializers(serializers.Serializer):
+    article_id = serializers.IntegerField(required = True , allow_null = False)
