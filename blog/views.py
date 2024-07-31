@@ -118,7 +118,7 @@ class SearchArticleAPIView(APIView): #baraye zamani estefade mishe ke bekhahim y
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR )
         
 class SubmitArticleAPIView(APIView):
-
+    # baraye estefade az inke ba api yek maghale benevisim bayad az : http://localhost:8000/article/submit/ estefade konim
     def post(self , requset , format = None):
         try:
             serializer = serializers.SubmitArticleSerializers(data=requset.data)
@@ -149,6 +149,27 @@ class SubmitArticleAPIView(APIView):
         #NOKTE: ma az 'created_at' estefade nemikonim chon ke created_at meghdar default= datetime.now ro dare yani zamani ke object yek 
         #edame: maghale sakhte mishe created_at meghdar pishfarz zamani ke maghale dare sakhte mishe ro migire va ma lazem nist zamani ke darim ba api kar mikonim meghdare created_at ro bedim
             return Response({'status':'OK'},status=status.HTTP_200_OK)
+        except:
+            return Response( {'status':"Internal Server Error , We'll Check It Latter"} ,
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR )
+        
+
+class UpdateArticleAPIView(APIView):
+    # baraye update cover az in link vared mishavim :  
+    def post(self , request , format= None):
+        try: 
+            serializer = serializers.UpdateArticleCoverSerializers(data=request.data)
+
+            if serializer.is_valid():
+                article_id = serializer.data.get('article_id')
+                cover = request.FILES['cover']
+            else:
+                return Response({'status':'Bad Request.'} , status=status.HTTP_400_BAD_REQUEST)
+            
+
+            Article.objects.filter(id= article_id).update(cover=cover)
+
+            return Response({'status':'OK'} , status=status.HTTP_200_OK)
         except:
             return Response( {'status':"Internal Server Error , We'll Check It Latter"} ,
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR )
