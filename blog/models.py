@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField #bayad yek python manage.py collectstatic ham bezanim ta yekseri file ro baraye ma tanzim kone
 from datetime import datetime
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
 
 # elat inke ma az FileField be jaye ImageFild estefade kardim in bood ke FileField khali kamel tar hast
 # ama ImageFiled dige niazi be validation nadare vali dar FileField bayad taarif konim
@@ -43,7 +44,34 @@ class Article(models.Model):
     
     # def get_absolute_url(self):
     #     return reverse('single_standard',args=[self.pk])
+
+
+class ActiveCommentManger(models.Manager):
+    def get_queryset(self):
+        return super(ActiveCommentManger , self).get_queryset().filter(active = True)
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE,related_name='comments')
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name='Comment author',
+    )
     
+    body = models.TextField(verbose_name='Comment text')
+    datetime_created = models.DateTimeField(auto_now_add=True)
+
+    active = models.BooleanField(default=True)
+    objects = models.Manager()
+    active_comments_manager = ActiveCommentManger()
+
+    def get_absolute_url(self):
+        return reverse("article_detail", args=[self.article.id])    
+
+
+    def __str__(self):
+        return self.author.first_name + ' ' + self.author.last_name
 
 class Category(models.Model):
     title = models.CharField(max_length=128 , null= False, blank=False)
