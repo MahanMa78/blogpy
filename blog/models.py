@@ -35,7 +35,7 @@ class Article(models.Model):
     # علت اینکه Category رو داخل ' ' گذاشتیم فریب جنگو هست
     author = models.ForeignKey(UserProfile , on_delete= models.CASCADE)
     promote = models.BooleanField(default=False)
-    
+    is_active = models.BooleanField(default=True)
 
 
     def __str__(self):

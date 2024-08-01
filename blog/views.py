@@ -5,13 +5,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import serializers
+from django.views import generic
 
 class IndexPage(TemplateView):
 
     def get(self, request, **kwargs):
         
         article_data = []
-        all_articles = Article.objects.all().order_by('-created_at')[:6] #baraye inke boro va 9ta item akhar ro biar
+        all_articles = Article.objects.filter(is_active = True).order_by('-created_at')[:12] #baraye inke boro va 9ta item akhar ro biar
         for article in all_articles:
             article_data.append({
                 'title' : article.title,
@@ -46,9 +47,12 @@ class ConatactPage(TemplateView):
     template_name = 'page-contact.html'
 
 
-# class ArticlePage(TemplateView):
-#     model = Article
-#     template_name = 'single-standard.html'
+class ArticlePage(generic.DetailView):
+    model = Article
+    template_name = 'single-standard.html'
+    context_object_name = 'article'
+    
+    
 
 
 class AllArticleAPIView(APIView):
