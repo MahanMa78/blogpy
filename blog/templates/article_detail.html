@@ -36,7 +36,7 @@
 
             <h2 style="text-align: right">{{ article.title }}</h2>
 
-            <p>{{ article.content }}</p>
+            <p>{{ article.content|safe }}</p>
 
                 <div class="entry__author">
                     <img src="{{ article.author.avatar.url }}" alt="">

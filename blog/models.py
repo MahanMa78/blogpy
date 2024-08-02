@@ -20,7 +20,7 @@ def validate_file_extension(value):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User , on_delete=models.CASCADE)
-    avatar = models.FileField(upload_to='files/user_avatar/' , null= False , blank=False , validators=[validate_file_extension])
+    avatar = models.FileField(upload_to='files/user_avatar/' , null= True , blank=True , validators=[validate_file_extension])
     description = models.CharField(max_length=512 , null=False , blank= False)
 
     def __str__(self):
