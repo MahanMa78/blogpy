@@ -21,4 +21,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category,CategoryAdmin )
 
-admin.site.register(Comment)
+
+class CommentInLine(admin.ModelAdmin):
+    model = Comment
+    list_display = ['author' , 'body' , 'active']   
+    
+
+admin.site.register(Comment , CommentInLine )

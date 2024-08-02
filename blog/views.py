@@ -40,16 +40,18 @@ class IndexPage(TemplateView):
             'article_data' : article_data, #dar asl alan 'article_data' kelid ma dar dakhel template hast
             'promote_article_data' : promote_data,
         }
-        return render(request, 'index.html',context) #request : darkhast karbar, "index.html" : safhe ke darim , context : mohtavaie ke darim
+        return render(request, 'articles_list.html',context) #request : darkhast karbar, "index.html" : safhe ke darim , context : mohtavaie ke darim
     
 
 class ConatactPage(TemplateView):
-    template_name = 'page-contact.html'
+    model = UserProfile
+    template_name = 'contact_page.html'
+    context_object_name = 'contact'
 
 
 class ArticlePage(generic.DetailView):
     model = Article
-    template_name = 'single-standard.html'
+    template_name = 'article_detail.html'
     context_object_name = 'article'
     
     

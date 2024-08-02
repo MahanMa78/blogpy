@@ -37,7 +37,7 @@ class Article(models.Model):
     author = models.ForeignKey(UserProfile , on_delete= models.CASCADE)
     promote = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-
+    short_description = models.CharField(max_length=512 , null= True , blank= True)
 
     def __str__(self):
         return self.title

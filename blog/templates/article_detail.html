@@ -1,0 +1,62 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--top-padding s-content--narrow">
+
+        <article class="row entry format-standard">
+
+            <div class="entry__media col-full">
+                <div class="entry__post-thumb">
+                    <img src="{{ article.cover.url }}"
+                         
+                         sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                </div>
+            </div>
+
+            <div class="entry__header col-full">
+                <h1 class="entry__header-title display-1">
+                    {{ article.title }}
+                </h1>
+                <ul class="entry__header-meta">
+                    <li class="date">{{ article.created_at.date }}</li>
+                    <li class="byline">
+                        By
+                        <a href="#0">{{ article.author }}</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <p>
+                <img src="images/wheel-1000.jpg" srcset="images/wheel-2000.jpg 2000w, images/wheel-1000.jpg 1000w, images/wheel-500.jpg 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+            </p>
+
+            <h2 style="text-align: right">{{ article.title }}</h2>
+
+            <p>{{ article.content }}</p>
+
+                <div class="entry__author">
+                    <img src="{{ article.author.avatar.url }}" alt="">
+
+                    <div class="entry__author-about">
+                        <h5 class="entry__author-name">
+                            <span>پست شده توسط</span>
+                            <a href="#0">{{ article.author.user.first_name}}  {{ article.author.user.last_name}} </a>
+                        </h5>
+
+                        
+                    </div>
+                </div>
+
+            </div> <!-- s-entry__main -->
+
+        </article> <!-- end entry/article -->
+
+
+    </section> <!-- end s-content -->
+
+
+    {% endblock  %}
