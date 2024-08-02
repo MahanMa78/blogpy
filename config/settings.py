@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'accounts',
     'allauth',
     'allauth.account',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    "bootstrap5",
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
 
@@ -160,7 +163,24 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#accounts config
+AUTH_USER_MODEL= 'accounts.CustomUser'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
+#all auth settings
+ACCOUNT_SESSION_REMEBER=True
+
+#baraye nakahstan username
+ACCOUNT_USERNAME_REQUIRED = False
+#kolan bekhayem ba email kar konim dakhel site
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True #mige email vajebe
+ACCOUNT_UNIQUE_EMAIL = True #mige email ha nabayad tekrari bashan
+
+#crispy forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK="bootstrap5"
 
 
 #Static Files
