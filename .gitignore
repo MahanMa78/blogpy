@@ -4,19 +4,16 @@
 #Virtual Env
 venv/
 
-config/__pycache__/
-
-#Database
-db.sqlite3
 
 #Migrations
 accounts/migrations/
+accounts/__pycache__/
 blog/migrations/
 blog/__pycache__/
 config/__pycache__/
 
 
-# user : admin
+# user : admin -> homa
 # pass : 40221441054052Ma
 
 #Static files

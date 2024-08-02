@@ -54,8 +54,9 @@ class ArticlePage(generic.DetailView):
     template_name = 'article_detail.html'
     context_object_name = 'article'
     
-    
 
+class HomePageView(TemplateView):
+    template_name = 'home.html'
 
 class AllArticleAPIView(APIView):
     # baraye search kardanesh bayad benevisim : http://localhost:8000/article/all/

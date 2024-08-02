@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField #bayad yek python manage.py collectsta
 from datetime import datetime
 from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 # elat inke ma az FileField be jaye ImageFild estefade kardim in bood ke FileField khali kamel tar hast
 # ama ImageFiled dige niazi be validation nadare vali dar FileField bayad taarif konim
@@ -19,7 +20,7 @@ def validate_file_extension(value):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User , on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
     avatar = models.FileField(upload_to='files/user_avatar/' , null= True , blank=True , validators=[validate_file_extension])
     description = models.CharField(max_length=512 , null=False , blank= False)
 
