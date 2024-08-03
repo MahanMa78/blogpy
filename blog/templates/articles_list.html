@@ -19,7 +19,7 @@
                             <div class="entry__content">
                                 <span class="entry__category"><a href="#0">{{ promote_article.category }}</a></span>
 
-                                <h1><a href="#0" title="">{{ promote_article.title }}</a></h1>
+                                <h1><a href="{{ promote_article.get_absolute_url }}" title="">{{ promote_article.title }}</a></h1>
 
                                 <div class="entry__info">
                                     <a href="#0" class="entry__profile-pic">
@@ -56,7 +56,7 @@
 
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
-                            <a href="single-standard.html" class="item-entry__thumb-link">
+                            <a href="" class="item-entry__thumb-link">
                                 <img src="{{ article.cover }}" alt="">
                             </a>
                         </div>
@@ -66,7 +66,7 @@
                                 <a href="category.html">{{ article.category }}</a>
                             </div>
 
-                            <h1 class="item-entry__title"><a href="single-standard.html">{{ article.title }}</a></h1>
+                            <h1 class="item-entry__title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h1>
 
                             <div class="item-entry__date">
                                 <a href="single-standard.html">{{ article.created_at }}</a>
