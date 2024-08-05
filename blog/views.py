@@ -56,6 +56,12 @@ class ArticlePage(generic.DetailView):
     model = Article
     template_name = 'article_detail.html'
     context_object_name = 'article'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form']=CommentForm
+        # context['add_to_cart_form'] = AddToCartProductForm()
+        return context
     
 
 class HomePageView(TemplateView):

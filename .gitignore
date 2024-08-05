@@ -9,6 +9,8 @@ venv/
 accounts/migrations/
 accounts/__pycache__/
 blog/migrations/
+persian_translate/migrations/
+persian_translate/__pycache__/
 blog/__pycache__/
 config/__pycache__/
 
