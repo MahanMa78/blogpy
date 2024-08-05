@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import serializers
+from accounts.models import CustomUser
 from django.views import generic
 from .forms import CommentForm
 from django.contrib import messages
@@ -166,7 +167,7 @@ class SubmitArticleAPIView(APIView):
             else:
                 return Response({'status':'Bad Request.'}, status=status.HTTP_400_BAD_REQUEST)
             
-            user = User.objects.get(id = author_id)
+            user = CustomUser.objects.get(id = author_id)
             # ham category va ham author ro bayad object hasho begirim shon darim azash id migirm
             author = UserProfile.objects.get(user = user)
             category = Category.objects.get(id = category_id)

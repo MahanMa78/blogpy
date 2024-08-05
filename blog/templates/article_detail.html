@@ -83,7 +83,11 @@
                                     <div class="review__container">
                                         <div class="review__text">
                                             <div class="d-flex flex-sm-row flex-row">
-                                                <img src="{% static "img/others/comment-1.jpg" %}" alt="Review Avatar" class="review__avatar p-3">
+                                                {% if article.author.avatar.url %}
+                                                <img src="{{ article.author.avatar.url }}" alt="Review Avatar" class="review__avatar p-3">
+                                                {% else %}
+                                                <img src="" alt="Review Avatar" class="review__avatar p-3">
+                                                {% endif %}
                                                 <div>
                                                     <div class="review__meta" dir='ltr'>
                                                         <span class="review__published-date">{{comment.datetime_created|to_jalali:'%Y/%m/%d _ %H:%M:%S'|translate_number}}</span>
@@ -111,7 +115,7 @@
                                     {% if user.is_authenticated %}
                                     <span class="reply-title pull-right">   Write your comment </span>
                                     <br>
-                                    <form action="{% url "comment_create" article.id %}" method='POST' >
+                                    <form action="{% url "comment_create" article.pk %}" method='POST' >
                                         {% csrf_token %}
                                         {{ comment_form|crispy}}
                                         <input type="submit" value=" submit ">
