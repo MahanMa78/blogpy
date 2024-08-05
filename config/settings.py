@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'allauth',
     'allauth.account',
+    # 'allauth.socialaccount',
     'crispy_forms',
     'crispy_bootstrap5',
     "bootstrap5",
@@ -175,11 +176,11 @@ LOGOUT_REDIRECT_URL = 'home'
 ACCOUNT_SESSION_REMEBER=True
 
 #baraye nakahstan username
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 #kolan bekhayem ba email kar konim dakhel site
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True #mige email vajebe
-ACCOUNT_UNIQUE_EMAIL = True #mige email ha nabayad tekrari bashan
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+# ACCOUNT_EMAIL_REQUIRED = False #mige email vajebe
+# ACCOUNT_UNIQUE_EMAIL = True #mige email ha nabayad tekrari bashan
 
 #crispy forms settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
