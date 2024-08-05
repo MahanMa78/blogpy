@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .models import *
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import serializers
 from django.views import generic
+from .forms import CommentForm
+from django.contrib import messages
 
 class IndexPage(TemplateView):
 
@@ -79,7 +82,25 @@ class AllArticleAPIView(APIView):
         except:
             return Response( {'status':"Internal Server Error , We'll Check It Latter"} ,
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR )
-        
+
+
+class CommentCreateView(generic.CreateView) :
+    model = Comment
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+
+        article_id = int(self.kwargs['article_id'])
+        article = get_object_or_404(Article,id=article_id)
+        obj.article = article
+
+        messages.success(self.request,("Comment successfully created"))
+
+        return super().form_valid(form)
+    
+    
 
 
 class SingleArticleAPIView(APIView):#baraye zamani estefade mishe ke bekhahim yek maghale ro search konim
