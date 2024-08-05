@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jalali_date',
     'blog',
     'ckeditor',
     'rest_framework',
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     "bootstrap5",
+    'persian_translate',
+
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
 
