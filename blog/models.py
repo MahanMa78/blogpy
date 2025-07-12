@@ -19,13 +19,13 @@ def validate_file_extension(value):
         raise ValidationError("Unsupported file extension.")
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
-    avatar = models.FileField(upload_to='files/user_avatar/' , null= True , blank=True , validators=[validate_file_extension])
-    description = models.CharField(max_length=512 , null=False , blank= False)
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
+#     avatar = models.FileField(upload_to='files/user_avatar/' , null= True , blank=True , validators=[validate_file_extension])
+#     description = models.CharField(max_length=512 , null=False , blank= False)
 
-    def __str__(self):
-        return self.user.first_name + " " + self.user.last_name
+#     def __str__(self):
+#         return self.user.first_name + " " + self.user.last_name
 
 
 class Article(models.Model):
@@ -35,7 +35,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(default=datetime.now , blank= False)
     category = models.ForeignKey("Category" , on_delete=models.CASCADE)
     # علت اینکه Category رو داخل ' ' گذاشتیم فریب جنگو هست
-    author = models.ForeignKey(UserProfile , on_delete= models.CASCADE)
+    author = models.ForeignKey("accounts.CustomUser" , on_delete= models.CASCADE)
     promote = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     short_description = models.CharField(max_length=512 , null= True , blank= True)

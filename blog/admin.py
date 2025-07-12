@@ -3,10 +3,10 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['id','user' , 'avatar' , 'description']
+# class UserProfileAdmin(admin.ModelAdmin):
+#     list_display = ['id','user' , 'avatar' , 'description']
 
-admin.site.register(UserProfile,UserProfileAdmin)
+# admin.site.register(UserProfile,UserProfileAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):

@@ -47,10 +47,10 @@ class IndexPage(TemplateView):
         return render(request, 'articles_list.html',context) #request : darkhast karbar, "index.html" : safhe ke darim , context : mohtavaie ke darim
     
 
-class ConatactPage(TemplateView):
-    model = UserProfile
-    template_name = 'contact_page.html'
-    context_object_name = 'contact'
+# class ConatactPage(TemplateView):
+#     model = UserProfile
+#     template_name = 'contact_page.html'
+#     context_object_name = 'contact'
 
 
 class ArticlePage(generic.DetailView):
